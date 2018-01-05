@@ -19,11 +19,11 @@ namespace Egyszámjáték_201710
 		public List<Játékos> játékosok = new List<Játékos>();
 		public Számjáték(string fájlnév)
 		{
-			var adatok = File.ReadAllLines(fájlnév);
-			foreach (var sor in adatok)
+			var adatok = File.ReadAllLines(fájlnév);    // beolvasás sorokba
+			foreach (var sor in adatok) // a sorok további feldolgozása
 			{
-				var adatsor = sor.Split(' ');
-				var j = new Játékos();
+				var adatsor = sor.Split(' ');   // darabolás a szóközök mentén
+				var j = new Játékos();  // az átmeneti tároláshoz
 				j.név = adatsor[0];
 				var tippsor = adatsor.ToList(); // mert tömbből nem lehet törölni
 				tippsor.RemoveAt(0);	// ha a nevet kitöröljük, a maradék...
@@ -43,30 +43,41 @@ namespace Egyszámjáték_201710
 		}
 		public bool volt_e_tipp(int forduló, int tipp)
 		{
-			//	return játékosok.FindAll (j => j.tippek [forduló-1] == tipp).Count == 0 ? false : true;
+			//	return játékosok.FindAll (j => j.tippek [forduló-1] == tipp)
+            //                  .Count == 0 ? false : true;
 			// ...de a "régi" módszerrel is lehet:
-			return játékosok.Where(j => j.tippek[forduló - 1] == tipp).ToList().Count() == 0 ? false : true;
+			return játékosok.Where(j => j.tippek[forduló - 1] == tipp)
+                            .ToList().Count() == 0 ? false : true;
 		}
 		public int legnagyobbtipp
-		{
+		{                                     // a "maximumok maximuma"!
 			get { return játékosok.Select(j => j.tippek.Max()).Max(); }
 		}
-		public List<int> forduló_tippjei(int forduló)
+		public List<int> forduló_tippjei(int forduló)   // "szorgalmi feladat"
 		{
 			return játékosok.Select(t => t.tippek[forduló - 1]).ToList();
 		}
 		public string nyertes_tipp(int forduló)
 		{
+            /*
+             * Ez egy, a nyertes tippet és a nyertes nevét, vagy üres string-et
+             * visszaadó metódus. A további feldolgozás a hívó kódban történik.
+             */
+                              // először a tippek fordulónkénti csoportosítása,
 			var nyertes = játékosok.GroupBy(f => f.tippek[forduló - 1])
+                              // majd az egyedi tippek kiválasztása,
 							 .Where(t => t.Count() == 1)
+                              // utána növekvőbe rendezés, 
 							 .OrderBy(t => t.Key)
+                              // végül az első elem (vagy null) kiválasztása
 							 .FirstOrDefault();
-			var ny_tipp = nyertes != null ? nyertes.Key.ToString() : "";
-			var ny_név = nyertes != null ?
-					játékosok.Where(j => j.tippek[forduló - 1] == nyertes.Key).First().név : "";
-			var elválasztó = nyertes != null ? ";" : "";
-			return ny_tipp + elválasztó + ny_név;
-		}
+                                    // a nyertes tipp, majd elválasztó,...
+            return nyertes != null ? nyertes.Key.ToString() + ";" +
+                                    // végül a nyertes játékos neve,...
+                   játékosok.Where(j => j.tippek[forduló - 1] == nyertes.Key)
+                            .First().név : ""; // vagy (ha épp nincs nyertes)
+                                               // akkor ÜRES string!
+        } // szorgalmi feladat :)
 		public void listázás()
 		{
 			foreach (var j in játékosok)
