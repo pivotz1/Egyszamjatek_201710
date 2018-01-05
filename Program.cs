@@ -87,7 +87,7 @@ namespace Egyszámjáték_201710
 		{
 			Console.WriteLine("Egyszámjáték (2017.10.hó szakmai OKJ)");
 			//2. feladat
-			var játék = new Számjáték(@"/home/misterx/C_Sharp/Egyszámjáték_201710/egyszamjatek.txt");
+			var játék = new Számjáték(@"/home/misterx/CSharp/Egyszámjáték_201710/egyszamjatek.txt");
 			//játék.listázás();
 			Console.WriteLine("3. feladat: Játékosok száma: {0}", játék.játékosok_száma);
 			Console.WriteLine("4. feladat: Fordulók száma: {0}", játék.fordulók_száma);
