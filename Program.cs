@@ -64,7 +64,7 @@ namespace Egyszámjáték_201710
              * visszaadó metódus. A további feldolgozás a hívó kódban történik.
              */
                               // először a tippek fordulónkénti csoportosítása,
-			var nyertes = játékosok.GroupBy(f => f.tippek[forduló - 1])
+			var nyertes = játékosok.GroupBy(j => j.tippek[forduló - 1])
                               // majd az egyedi tippek kiválasztása,
 							 .Where(t => t.Count() == 1)
                               // utána növekvőbe rendezés, 
@@ -122,7 +122,7 @@ namespace Egyszámjáték_201710
 				var szöveg = "Forduló sorszáma: " + forduló +
 							 "\nNyertes tipp: " + ny_tipp.Split(';')[0] +
 							 "\nNyertes játékos: " + ny_tipp.Split(';')[1];
-				File.WriteAllText("nyertes.txt", szöveg);
+				File.WriteAllText(@"../../nyertes.txt", szöveg);
 			}
 			//	Console.ReadKey (); // csak VS-ben kell...
 		}

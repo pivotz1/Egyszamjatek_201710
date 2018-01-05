@@ -38,6 +38,7 @@
   <ItemGroup>
     <None Include="egyszamjatek.txt" />
     <None Include="egyszamjatek_fel.pdf" />
+    <None Include="nyertes.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
