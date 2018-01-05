@@ -3,6 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 
+// A 2017.10.hó szakmai (ágazati) informatika érettségi vizsga 
+// programozás feladata C#-ban.
+
 namespace Egyszámjáték_201710
 {
 	class Játékos
