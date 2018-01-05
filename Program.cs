@@ -27,7 +27,8 @@ namespace Egyszámjáték_201710
 				j.név = adatsor[0];
 				var tippsor = adatsor.ToList();
 				tippsor.RemoveAt(0);
-				j.tippek = tippsor.Select(int.Parse).ToList();
+				j.tippek = tippsor.ConvertAll(int.Parse);
+			//	j.tippek = tippsor.Select(int.Parse).ToList();
 				játékosok.Add(j);
 			}
 		}
@@ -110,7 +111,7 @@ namespace Egyszámjáték_201710
 							 "\nNyertes játékos: " + ny_tipp.Split(';')[1];
 				File.WriteAllText("nyertes.txt", szöveg);
 			}
-			//	Console.ReadKey ();
+			//	Console.ReadKey (); // csak VS-ben kell...
 		}
 	}
 }
