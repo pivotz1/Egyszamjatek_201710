@@ -7,13 +7,13 @@ using System.Linq;
 // programozás feladata C#-ban.
 
 namespace Egyszámjáték_201710
-{
+{	// egyetlen játékos adatai
 	class Játékos
 	{
 		public string név;
 		public List<int> tippek = new List<int>();
 	}
-
+	// az egész játékmenet adatai
 	class Számjáték
 	{
 		public List<Játékos> játékosok = new List<Játékos>();
@@ -25,10 +25,11 @@ namespace Egyszámjáték_201710
 				var adatsor = sor.Split(' ');
 				var j = new Játékos();
 				j.név = adatsor[0];
-				var tippsor = adatsor.ToList();
-				tippsor.RemoveAt(0);
-				j.tippek = tippsor.ConvertAll(int.Parse);
-			//	j.tippek = tippsor.Select(int.Parse).ToList();
+				var tippsor = adatsor.ToList(); // mert tömbből nem lehet törölni
+				tippsor.RemoveAt(0);	// ha a nevet kitöröljük, a maradék...
+				j.tippek = tippsor.ConvertAll(int.Parse); // ...a tippsor, de...
+				// át kell alakítani 'int'-re. Itt két megoldás is szerepel.
+				//	j.tippek = tippsor.Select(int.Parse).ToList();
 				játékosok.Add(j);
 			}
 		}
