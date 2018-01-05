@@ -43,6 +43,7 @@ namespace Egyszámjáték_201710
 		public bool volt_e_tipp(int forduló, int tipp)
 		{
 			//	return játékosok.FindAll (j => j.tippek [forduló-1] == tipp).Count == 0 ? false : true;
+			// ...de a "régi" módszerrel is lehet:
 			return játékosok.Where(j => j.tippek[forduló - 1] == tipp).ToList().Count() == 0 ? false : true;
 		}
 		public int legnagyobbtipp
